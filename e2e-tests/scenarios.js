@@ -5,37 +5,38 @@
 describe('my app', function() {
 
 
-  it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
+  // TODO add a 'home' page and update this test
+  it('should automatically redirect to /viewJira when location hash/fragment is empty', function() {
     browser.get('index.html');
-    expect(browser.getLocationAbsUrl()).toMatch("/view1");
+    expect(browser.getLocationAbsUrl()).toMatch("/viewJira");
   });
 
 
-  describe('view1', function() {
+  describe('viewJira', function() {
 
     beforeEach(function() {
-      browser.get('index.html#!/view1');
+      browser.get('index.html#!/viewJira');
     });
 
 
-    it('should render view1 when user navigates to /view1', function() {
+    it('should render viewJira when user navigates to /viewJira', function() {
       expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 1/);
+        toMatch(/partial for view Jira/);
     });
 
   });
 
 
-  describe('view2', function() {
+  describe('viewMeeting', function() {
 
     beforeEach(function() {
-      browser.get('index.html#!/view2');
+      browser.get('index.html#!/viewMeeting');
     });
 
 
-    it('should render view2 when user navigates to /view2', function() {
+    it('should render viewMeeting when user navigates to /viewMeeting', function() {
       expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 2/);
+        toMatch(/partial for view Meeting/);
     });
 
   });
