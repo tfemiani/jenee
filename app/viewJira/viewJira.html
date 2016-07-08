@@ -1,1 +1,147 @@
-<p>This is the partial for view 1.</p>
+<div class='custom' ng-controller="ViewJiraCtrl">
+  <div class='container-fluid'>
+    <div class='container'>
+      <div class='row'>
+        <h1>Jira Description Generator</h1>
+        <p><i>Why is this here?</i></p>
+        <ol>
+          <li>To make writing Jira Issue Descriptions easier</li>
+          <li>To unify Description content and style</li>
+        </ol>
+<!-- STEP 1 - SELECT ISSUE TYPE  -->
+        <h2 ng-class="{'active-text': issueType === undefined}">Select Type</h2>
+        <p>
+        Click on one of the images below.
+        </p>
+        </span>
+
+      <div class='row'>
+        <div class='col-md-4 centered' ng-click="setIssueType('story')" ng-class="{'active': issueType === 'story'}">
+Story
+<pre>
+ _________________________ 
+|            |            |
+| ~~~~~~~~~~ | ~~~~~~~~~~ |
+| ~~~~~~~~~~ | ~~~~~~~~~~ |
+| ~~~~~~~~~~ | ~~~~~~~~~~ |
+| ~~~~~~~~~~ | ~~~~~~~~~~ |
+| pg1        |        pg2 |
+|____________|____________|
+</pre>
+      </div>
+      <div class='col-md-4 centered' ng-click="setIssueType('bug')" ng-class="{'active': issueType === 'bug'}">
+Bug
+<pre>
+     \/     
+    (__)    
+---( [] )---
+---( [] )---
+---( [] )---
+    \  /    
+     \/     
+     ||     
+</pre>
+      </div>
+      <div class='col-md-4 centered' ng-click="setIssueType('task')" ng-class="{'active': issueType === 'task'}">
+Task
+<pre>
+________________
+|              |
+|          /   |
+|         /    |
+|        /     |
+|    \  /      |
+|     \/       |
+|______________|
+</pre>
+      </div>
+      <div class='col-md-6'>
+
+<!-- STEP 2 - ENTER INPUTS -->
+        <h2 ng-class="{'active-text': issueType !== undefined && !resultsReady}">Enter Inputs</h2>
+
+        <div ng-show="issueType === 'story'">
+          <h3>User Story</h3>
+          <p>As:</p>
+          <input class="form-control" ng-model="role" type="textarea" maxLength="512" id="role" placeholder="{role}">
+          <p>I want:</p>
+          <input class="form-control" ng-model="outcome" type="textarea" maxLength="512" id="outcome" placeholder="{outcome}">
+          <p>so that:</p>
+          <input class="form-control" ng-model="benefit" type="textarea" maxLength="512" id="benefit" placeholder="{benefit}">
+          <h3>Acceptance Criteria</h3>
+          <p>
+          Sample Acceptance Criteria<br/>
+          * Given shopper with valid JWT Auth<br/>
+          ** When shopper calls GET /v1/cart<br/>
+          *** Should return 200 status<br/>
+          *** Should return cart body<br/>
+          </pre>
+          </p>
+          <textarea class="form-control" ng-model="acceptanceCriteria" placeholder="Remember to format!" cols="30" rows="10" id="ac"></textarea>
+        </div>
+
+        <div ng-show="issueType === 'bug'">
+          <h3>Steps to reproduce</h3>
+          <textarea class="form-control" placeholder="What did you do to find the bug?" cols="30" rows="5" ng-model="repro"></textarea>
+          <h3>Actual behavior</h3>
+          <textarea class="form-control" placeholder="What happened?" cols="30" rows="5" ng-model="actual"></textarea>
+          <h3>Expected behavior</h3>
+          <textarea class="form-control" placeholder="What should happen?" cols="30" rows="5" ng-model="expected"></textarea>
+        </div>
+
+        <div ng-show="issueType === 'task'">
+          <h3>Requirements</h3>
+          <textarea class="form-control" placeholder="Describe what needs to be done for this simple task." cols="30" rows="5" ng-model="requirements"></textarea>
+        </div>
+<!--
+  <textarea ng-model="agenda" ng-required="false" ng-trim="true">
+  </textarea>
+  <textarea ng-model="appendix" ng-required="false" ng-trim="true">
+  </textarea>
+  <input ng-model="zoomName" ng-required="false" ng-pattern="http" placeholder="EG tfemiani">
+  <input ng-model="zoomNumber" type="number" ng-required="false" placeholder="EG 4551337">
+-->
+      </div>
+<!-- STEP 3 - RESULT -->
+      <div class='col-md-6' ng-mouseover="checkIfResultsReady()">
+        <h2 ng-class="{'active-text': resultsReady}">
+          Result
+        </h2>
+        <p>
+        Copy the above description and paste into the "Description" when creating your Jira story
+        </p>
+
+        <div ng-show="issueType === 'story'">
+          <pre ng-show="role || outcome || benefit">
+h2. User Story<br/>
+As *{{role}}*, I want: *{{outcome}}* so that: *{{benefit}}*
+          </pre>
+          <pre ng-show="acceptanceCriteria">
+h2. Acceptance Criteria<br/>
+{{acceptanceCriteria}}
+          </pre>
+        </div>
+
+        <div ng-show="issueType === 'bug'">
+          <pre ng-show="repro || actual || expected">
+h2. Steps to Reproduce
+{{repro}}
+
+h2. Actual Behavior
+{{actual}}
+
+h2. Expected Behavior
+{{expected}}
+          </pre>
+        </div>
+
+        <div ng-show="issueType === 'task'">
+          <pre ng-show="requirements">
+h2. Requirements
+{{requirements}}
+          </pre>
+        </div>
+
+      </div>
+
+</div>

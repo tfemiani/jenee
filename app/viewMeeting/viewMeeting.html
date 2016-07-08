@@ -1,5 +1,109 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<div class='custom' ng-controller="ViewMeetingCtrl">
+  <div class='container-fluid'>
+    <div class='container'>
+      <div class='row'>
+<!-- INPUT -->
+        <h1>
+          Meeting Template
+        </h1>
+        <p>
+          Enter meeting details and generate a description.
+        </p>
+      <div class='row'>
+      <div class='col-md-6'>
+        <h2>
+          Enter Inputs
+        </h2>
+        <h3>
+          Zoom Link Name
+        </h3>
+        <p>
+        Either the Zoom meeting number OR Zoom meeting name<br/>
+        </p>
+        Meeting Name: <input ng-model="zoomName" ng-required="false" ng-pattern="http" placeholder="EG tfemiani">
+        Meeting Number: <input ng-model="zoomNumber" type="number" ng-required="false" placeholder="EG 4551337">
+        <br/>
+        <button class='btn btn-sm btn-success' ng-click="saveZoomLink()">Save my Zoom Link</button>
+        <button class='btn btn-sm btn-success' ng-click="clearCookies()">Clear my Zoom Link</button>
+        <h3>
+          Background Information
+        </h3>
+        <p>
+          Provide any information that all attendees should know. For example:
+        <p>
+        <ul>
+          <li>
+            The meeting goal
+          </li>
+          <li>
+            A relevant Jira Issue
+          </li>
+          <li>
+            Any conclusions already reached
+          </li>
+        </ul>
+        <textarea ng-model="bg" ng-required="false" ng-trim="true">
+        </textarea>
+        <h3>
+          Agenda
+        </h3>
+        <p>
+        Include topics to cover to focus the meeting and achieve its goal.
+        </p>
+        <textarea ng-model="agenda" ng-required="false" ng-trim="true">
+        </textarea>
+        <h3>
+          Appendix
+        </h3>
+        <p>
+        Include any additional information.
+        </p>
+        <textarea ng-model="appendix" ng-required="false" ng-trim="true">
+        </textarea>
+      </div>
+<!-- OUTPUT -->
+      <div class='col-md-6'>
+        <h2>
+          Result
+        </h2>
+        <p><i>
+        Once you've entered inputs, copy everything below this line into your Meeting description.
+        </p></i>
+<pre ng-show='zoomName && !zoomNumber'>
+====
+Zoom
+====
+https://godaddy.zoom.us/my/{{zoomName}}
+
+</pre>
+<pre ng-show='zoomNumber && !zoomName'>
+====
+Zoom
+====
+https://godaddy.zoom.us/j/{{zoomNumber}}
+
+</pre>
+<pre ng-show='bg'>
+==========
+Background
+==========
+{{bg}}
+
+</pre>
+<pre ng-show='agenda'>
+======
+Agenda
+======
+{{agenda}}
+
+</pre>
+<pre ng-show='appendix'>
+========
+Appendix
+========
+{{appendix}}
+
+</pre>
+      </div>
+
+</div>
