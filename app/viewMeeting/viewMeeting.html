@@ -2,9 +2,11 @@
   <div class='container-fluid'>
     <div class='container'>
       <div class='row'>
+        <div id="notificationArea" ng-show="notificationMessage" class="alert alert-info centered">{{notificationMessage}}</div>
+
 <!-- INPUT -->
         <h1>
-          Meeting Template
+          Meeting Info Generator
         </h1>
         <p>
           Enter meeting details and generate a description.
@@ -14,17 +16,6 @@
         <h2>
           Enter Inputs
         </h2>
-        <h3>
-          Zoom Link Name
-        </h3>
-        <p>
-        Either the Zoom meeting number OR Zoom meeting name<br/>
-        </p>
-        Meeting Name: <input ng-model="zoomName" ng-required="false" ng-pattern="http" placeholder="EG tfemiani">
-        Meeting Number: <input ng-model="zoomNumber" type="number" ng-required="false" placeholder="EG 4551337">
-        <br/>
-        <button class='btn btn-sm btn-success' ng-click="saveZoomLink()">Save my Zoom Link</button>
-        <button class='btn btn-sm btn-success' ng-click="clearCookies()">Clear my Zoom Link</button>
         <h3>
           Background Information
         </h3>
@@ -60,6 +51,29 @@
         </p>
         <textarea ng-model="appendix" ng-required="false" ng-trim="true">
         </textarea>
+        <h3>
+          Zoom Link Name
+        </h3>
+        <p>
+        Either the Zoom meeting number <i>or</i> Zoom meeting name, but not both.<br/>
+        <div ng-show="zoomName && zoomNumber" class="alert alert-warning">
+          Uh oh. You can't have both a Zoom Name and a Zoom Number. Try this to fix it:
+          <ul>
+            <li>Remove one from the input boxes below</li>
+            <li>Click on the 'Clear my Zoom Link' button</li>
+          </ul>
+        </div>
+        </p>
+        <p>
+        <b>Meeting Name:</b> <input ng-model="zoomName" ng-required="false" ng-pattern="http" placeholder="EG tfemiani">
+        </p>
+        <p>
+        <b>Meeting Number:</b> <input ng-model="zoomNumber" type="number" ng-required="false" placeholder="EG 4545544551337">
+        </p>
+        <div>
+        <button class='btn btn-sm btn-info' ng-click="saveZoomLink()">Save my Zoom Link</button>
+        <button class='btn btn-sm btn-info' ng-click="clearCookies()">Clear my Zoom Link</button>
+        </div>
       </div>
 <!-- OUTPUT -->
       <div class='col-md-6'>
@@ -67,7 +81,7 @@
           Result
         </h2>
         <p><i>
-        Once you've entered inputs, copy everything below this line into your Meeting description.
+        Once you've entered inputs, copy everything below this section into your Meeting description.
         </p></i>
 <pre ng-show='zoomName && !zoomNumber'>
 ====

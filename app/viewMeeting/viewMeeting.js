@@ -10,23 +10,16 @@ angular.module('myApp.viewMeeting', ['ngRoute', 'ngCookies'])
 }])
 
 .controller('ViewMeetingCtrl', ['$scope', '$cookies', function($scope, $cookies) {
-  $scope.bg = 'Knausgaard austin swag PBR&B fashion axe, sriracha pug fixie. Locavore twee tilde migas, normcore irony blog paleo poutine man braid. Everyday carry mlkshk PBR&B skateboard, try-hard fingerstache forage disrupt thundercats. Roof party raw denim vinyl hella normcore messenger bag, mlkshk crucifix vegan direct trade kinfolk tofu.';
-  $scope.agenda = '1. Excepteur plaid whatever cliche\n';
-  $scope.agenda += '2. Veniam salvia taxidermy';
-  $scope.appendix = 'See http://x.co/practices'
-
   // Use cookies to save links
   $scope.saveZoomLink = function(){
     if ($scope.zoomName) {
       $cookies.put('zoomName', $scope.zoomName);
-      console.info('saved zoom name')
+      $scope.notificationMessage = 'Saved Zoom Name "' + $scope.zoomName + '"!';
     }
     if ($scope.zoomNumber) {
       $cookies.put('zoomNumber', $scope.zoomNumber);
-      console.info('saved zoom number')
+      $scope.notificationMessage = 'Saved Zoom Number "' + $scope.zoomNumber + '"!';
     }
-    console.info('cookies attempt done');
-    console.info($cookies);
   };
 
   $scope.clearCookies = function(){
@@ -34,7 +27,7 @@ angular.module('myApp.viewMeeting', ['ngRoute', 'ngCookies'])
     $scope.zoomName = null;
     $cookies.remove('zoomNumber');
     $scope.zoomNumber = null;
-    console.info('cookies cleared');
+    $scope.notificationMessage = 'Zoom Link successfully cleared!';
   };
 
   // Retrieve links from cookies

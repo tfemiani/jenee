@@ -75,9 +75,13 @@ ________________
           ** When shopper calls GET /v1/cart<br/>
           *** Should return 200 status<br/>
           *** Should return cart body<br/>
-          </pre>
           </p>
           <textarea class="form-control" ng-model="acceptanceCriteria" placeholder="Remember to format!" cols="30" rows="10" id="ac"></textarea>
+          <h3>Technical Background</h3>
+          <p>
+          Provide any relevant links, design documents, or other information
+          </p>
+          <textarea class="form-control" ng-model="technicalBackground" placeholder="This is an optional field, but it's often helpful!" cols="30" rows="10" id="ac"></textarea>
         </div>
 
         <div ng-show="issueType === 'bug'">
@@ -119,6 +123,10 @@ As *{{role}}*, I want: *{{outcome}}* so that: *{{benefit}}*
           <pre ng-show="acceptanceCriteria">
 h2. Acceptance Criteria<br/>
 {{acceptanceCriteria}}
+          </pre>
+          <pre ng-show="technicalBackground">
+h2. Technical Background<br/>
+{{technicalBackground}}
           </pre>
         </div>
 
