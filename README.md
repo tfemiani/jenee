@@ -1,4 +1,12 @@
-# angular-seed — the seed for AngularJS apps
+# jenee
+A Generator Angular Application
+
+## Start the app on server
+```sh
+cd /opt/jenee && forever start ./node_modules/http-server/bin/http-server -p 8000 -c-1 ./app
+```
+
+# original README: angular-seed — the seed for AngularJS apps
 
 This project is an application skeleton for a typical [AngularJS](http://angularjs.org/) web app.
 You can use it to quickly bootstrap your angular webapp projects and dev environment for these
