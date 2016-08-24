@@ -1,7 +1,21 @@
 # jenee
 A Generator Angular Application
 
-## Start the app on server
+## Setup the app on a server
+* Build server via OpenStack or your preferred method
+* Ensure firewall ingress is allowed for relevant IPs and ports
+* Install dependencies
+```sh
+# install server dependencies
+sudo yum install npm && sudo npm install -g forever
+# install app
+cd /opt/
+sudo git clone https://github.com/imjakeayala/jenee.git
+cd jenee/
+sudo npm start # install dependencies and start application
+^C (CTRL+C) # stop the application
+```
+* Run the app indefinitely
 ```sh
 cd /opt/jenee && forever start ./node_modules/http-server/bin/http-server -p 8000 -c-1 ./app
 ```
